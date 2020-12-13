@@ -1584,7 +1584,10 @@ def _serve_application(
 
     update_sanic_log_level()
 
-    app.run(host="0.0.0.0", port=port)
+    try:
+        app.run(host="0.0.0.0", port=port)
+    except NotFound:
+        print("The socket endpoint is not available because your websocket it still open.")
 
     return app
 
